@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Images } from './components/Images';
+import { Navigation } from './components/Navigation';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <p>Hello Hooks</p>
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div className="App">
+      <Navigation />
+      <Images />
+      <Navigation />
+    </div>
+  );
 }
 
 export default App;
