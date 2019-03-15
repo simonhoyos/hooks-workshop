@@ -1,11 +1,11 @@
 # React Medellin Hooks Workshop
 
-## Paso 1
+## Paso 2
 
-- En App.js podran ver que estamos mostrando 2 componentes Navigation. Uno para el header y otro para el footer. Por el momento estos componentes tendran su propio estado y seran independientes.
-- En este ejercicio usaremos el hook useState.
-- Crea un estado para el componente Navigation y su respectivo handler.
-- El componente debe tener dos `button`. Uno para disminuir el número de la página y otro para incrementarlo.
-- El número de la página se debe mostrar en un `span`.
+- En App.js podran ver que agregamos un componente Images. Este componente se encargara de obtener una lista de imagenes de [JSONPlaceholder](https://jsonplaceholder.typicode.com/) y renderizarlas.
+- En este ejercicio usaremos los hooks useState y useEffect.
+- En este ejercicio trabajaremos sobre el componente `./src/components/Images.js`, donde también podran encontrar instrucciones más detalladas.
+- Crea 3 estados para el componente Images data, error y loading; y sus respectivos handlers.
+- En el componente Images podran encontrar una configuración inicial de axios. Usen esta configuración para obtener la lista de imagenes y hacer cambios en el estado según sea requerido.
 
-- Puntos extra: desabilitar los botones cuando la página es menor o igual que 1 y mayor o igual que 10.
+- Puntos extra: cancelar la petición si el componente se va a desmontar.
