@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
-import './Counter.css';
+import React, { useState, useEffect } from 'react';
+import './Timer.css';
 
-export function Counter() {
+export function Timer() {
   const [count, setCount] = useState(0);
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
+
+  useEffect(() => {
+    setCount(prevCount => prevCount + 1);
+    let clock;
+    clock = setInterval(() => {
+      setTime(new Date().toLocaleTimeString());
+    });
+    return () => {
+      clearInterval(clock);
+    }
+  }, [time]);
 
   return (
     <div>
       <p>{count}</p>
-      <button onClick={() => setCount(prevCount => prevCount - 1)}>-</button>
-      <button onClick={() => setCount(prevCount => prevCount + 1)}>+</button>
+      <p>{time}</p>
     </div>
-  );
+  )
 }
