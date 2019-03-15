@@ -1,14 +1,23 @@
-// importa useState
-import React from 'react';
+import React, { useState } from 'react';
 
 export function Navigation() {
-  // iniciliza un estado page y un handler setPage con un valor por defecto de 1
+  const [page, setPage] = useState(1);
 
-
-  // Crea un botón prev y un botón next, y dos handlers para disminuir la página y aumentar la página en 1 respectivamente. Muestra el número de página en un span.
-  // Extra: dasibilita el botón prev cuando la página es menor o igual a 1 y el botón next cuando la página es mayor o igual a 10.
   return (
     <div className="navigation">
+      <button
+        onClick={() => setPage(prevPage => prevPage - 1)}
+        disabled={page <= 1}
+      >
+        prev
+      </button>
+      <span>{page}</span>
+      <button
+        onClick={() => setPage(prevPage => prevPage + 1)}
+        disabled={page >= 10}
+      >
+        next
+      </button>
     </div>
   );
 }
