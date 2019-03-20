@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+// importa useReducer
+import React, { useEffect } from 'react';
 import axios from 'axios';
 
 const imagesService = axios.create({
@@ -6,17 +7,22 @@ const imagesService = axios.create({
   timeout: 1000,
 });
 
+// define el estado inicial
+
+
+// crea una función reductora
+
+
 export function Images() {
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // Inicializa un nuevo estado que utilice nuestra función reductora y estado inicial.
 
 
   const CancelToken = axios.CancelToken;
   const source = CancelToken.source();
 
   useEffect(() => {
-    setLoading(true);
+    // Cambia valor del estado loading a true.
+
 
     imagesService.get('/photos', {
       params: {
@@ -26,13 +32,14 @@ export function Images() {
       cancelToken: source.token,
     })
       .then(({ data }) => {
-        setData(data);
-        setLoading(false);
+        // Almacena la respuesta en el estado data y cambia el valor del estado loading a false.
+
+
       })
       .catch((error) => {
-        console.log(error);
-        setError(error);
-        setLoading(false);
+        // Almacena los errores en el estado error y cambia el valor del estado loading a false.
+
+
       });
     return () => {
       source.cancel('stopped request');
@@ -40,11 +47,11 @@ export function Images() {
   }, []);
 
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Ups, Something went wrong!</p>;
+  if (state.loading) return <p>Loading...</p>;
+  if (state.error) return <p>Ups, Something went wrong!</p>;
   return (
     <div className="images-container">
-      {!!data.length && data.map(({ thumbnailUrl, id, title }) => (
+      {!!state.data.length && state.data.map(({ thumbnailUrl, id, title }) => (
         <img
           src={thumbnailUrl}
           alt={title}
