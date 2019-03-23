@@ -1,5 +1,6 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { Context } from '../store';
 
 const imagesService = axios.create({
   baseURL: 'https://jsonplaceholder.typicode.com',
@@ -40,6 +41,7 @@ function reducer(state, action) {
 }
 
 export function Images() {
+  const context = useContext(Context);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const CancelToken = axios.CancelToken;
@@ -50,7 +52,7 @@ export function Images() {
 
     imagesService.get('/photos', {
       params: {
-        _page: 1,
+        _page: context.state.page,
         _limit: 9,
       },
       cancelToken: source.token,
@@ -66,7 +68,7 @@ export function Images() {
     return () => {
       source.cancel('stopped request');
     }
-  }, []);
+  }, [context.state.page]);
 
 
   if (state.loading) return <p>Loading...</p>;
