@@ -1,11 +1,9 @@
 # React Medellin Hooks Workshop
 
-## Paso 2
+## Paso 4
 
-- En App.js podran ver que agregamos un componente Images. Este componente se encargara de obtener una lista de imagenes de [JSONPlaceholder](https://jsonplaceholder.typicode.com/) y renderizarlas.
-- En este ejercicio usaremos los hooks useState y useEffect.
-- En este ejercicio trabajaremos sobre el componente `./src/components/Images.js`, donde también podran encontrar instrucciones más detalladas.
-- Crea 3 estados para el componente Images data, error y loading; y sus respectivos handlers.
-- En el componente Images podran encontrar una configuración inicial de axios. Usen esta configuración para obtener la lista de imagenes y hacer cambios en el estado según sea requerido.
-
-- Puntos extra: cancelar la petición si el componente se va a desmontar.
+- En este ejercicio usaremos los hooks useReducer y useContext.
+- En este ejercicio trabajaremos sobre el componente `./src/components/Images.js`, `./src/components/Navigation.js`, y `./src/store/index.js` donde también podran encontrar instrucciones más detalladas.
+- En store crearemos un contexto que nos permitara compartir entre los componentes el número de la página, así como los handlers para modificarla.
+- En Navigation consumiremos los valores del contexto que creamos para compartir el número de página entre ambas navegaciones.
+- En Images actualizaremos las imagenes, haciendo una nueva petición al servidor cada vez que cambiamos la página.

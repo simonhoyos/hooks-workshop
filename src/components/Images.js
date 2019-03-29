@@ -1,28 +1,59 @@
-// importa useReducer
-import React, { useEffect } from 'react';
+// importa useContext
+import React, { useReducer, useEffect } from 'react';
 import axios from 'axios';
+// importa el contexto
+
 
 const imagesService = axios.create({
   baseURL: 'https://jsonplaceholder.typicode.com',
   timeout: 1000,
 });
 
-// define el estado inicial
+const SET_DATA = 'SET_DATA';
+const SET_ERROR = 'SET_ERROR';
+const TOGGLE_LOADING = 'TOGGLE_LOADING';
 
+const initialState = {
+  data: [],
+  error: null,
+  loading: false,
+}
 
-// crea una función reductora
+function reducer(state, action) {
+  switch (action.type) {
+    case SET_DATA:
+      return {
+        ...state,
+        data: action.payload,
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case TOGGLE_LOADING:
+      return {
+        ...state,
+        loading: !state.loading
+      };
+    default:
+      return state;
+  }
 
+}
 
 export function Images() {
-  // Inicializa un nuevo estado que utilice nuestra función reductora y estado inicial.
+  // Obten los valores del contexto
 
+
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const CancelToken = axios.CancelToken;
   const source = CancelToken.source();
 
+  // Cambia el número de página por el valor de página de nuestro contexto. Los efectos laterales deben correr cada vez que el número de página cambie
   useEffect(() => {
-    // Cambia valor del estado loading a true.
-
+    dispatch({ type: TOGGLE_LOADING });
 
     imagesService.get('/photos', {
       params: {
@@ -32,14 +63,12 @@ export function Images() {
       cancelToken: source.token,
     })
       .then(({ data }) => {
-        // Almacena la respuesta en el estado data y cambia el valor del estado loading a false.
-
-
+        dispatch({ type: SET_DATA, payload: data });
+        dispatch({ type: TOGGLE_LOADING });
       })
       .catch((error) => {
-        // Almacena los errores en el estado error y cambia el valor del estado loading a false.
-
-
+        dispatch({ type: SET_ERROR, payload: error });
+        dispatch({ type: TOGGLE_LOADING });
       });
     return () => {
       source.cancel('stopped request');
