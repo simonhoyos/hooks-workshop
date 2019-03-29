@@ -1,30 +1,36 @@
-// importa useReducer y createContext
-import React from 'react';
+import React, { useReducer, createContext } from 'react';
 
-// crea y exporta un nuevo contexto
+export const Context = createContext();
 
+const initialState = {
+  page: 1,
+};
 
-// define el estado inicial para page
+export const PREV_PAGE = 'PREV_ACTION';
+export const NEXT_PAGE = 'NEXT_ACTION';
 
-
-// crea una funcion reductora para cambiar de página
-
+function reducer(state, action) {
+  switch (action.type) {
+    case PREV_PAGE:
+      return {
+        ...state,
+        page: state.page - 1,
+      };
+    case NEXT_PAGE:
+      return {
+        ...state,
+        page: state.page + 1,
+      };
+    default:
+      return state;
+  }
+}
 
 export function PaginationProvider({ children }) {
-  // inicializa un nuevo estado que utilice nuestra función reductora y estado inicial
-
-
-  // modifica los siguientes handlers para cambiar el número de página en el estado
-  function handlePrev() {
-
-  }
-
-  function handleNext() {
-
-  }
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
-    <Context.Provider value={{ ...state, handlePrev, handleNext }}>
+    <Context.Provider value={{ state, dispatch }}>
       {children}
     </Context.Provider>
   )

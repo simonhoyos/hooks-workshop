@@ -1,25 +1,21 @@
-// importa useContext
-import React from 'react';
-// importa el contexto
-
+import React, { useContext } from 'react';
+import { Context, PREV_PAGE, NEXT_PAGE } from '../store';
 
 export function Navigation() {
-  // obten los valores del contexto
+  const { state, dispatch } = useContext(Context)
 
-
-  // Arregla el siguiente código para que funcione correctamente usando los valores del contexto
   return (
     <div className="navigation">
       <button
-        onClick={handlePrev}
-        disabled={page <= 1}
+        onClick={() => dispatch({ type: PREV_PAGE })}
+        disabled={state.page <= 1}
       >
         prev
       </button>
-      <span>{page}</span>
+      <span>{state.page}</span>
       <button
-        onClick={handleNext}
-        disabled={page >= 10}
+        onClick={() => dispatch({ type: NEXT_PAGE })}
+        disabled={state.page >= 10}
       >
         next
       </button>

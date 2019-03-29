@@ -1,8 +1,6 @@
-// importa useContext
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useContext } from 'react';
 import axios from 'axios';
-// importa el contexto
-
+import { Context } from '../store';
 
 const imagesService = axios.create({
   baseURL: 'https://jsonplaceholder.typicode.com',
@@ -43,21 +41,18 @@ function reducer(state, action) {
 }
 
 export function Images() {
-  // Obten los valores del contexto
-
-
+  const context = useContext(Context);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const CancelToken = axios.CancelToken;
   const source = CancelToken.source();
 
-  // Cambia el número de página por el valor de página de nuestro contexto. Los efectos laterales deben correr cada vez que el número de página cambie
   useEffect(() => {
     dispatch({ type: TOGGLE_LOADING });
 
     imagesService.get('/photos', {
       params: {
-        _page: 1,
+        _page: context.state.page,
         _limit: 9,
       },
       cancelToken: source.token,
@@ -73,7 +68,7 @@ export function Images() {
     return () => {
       source.cancel('stopped request');
     }
-  }, []);
+  }, [context.state.page]);
 
 
   if (state.loading) return <p>Loading...</p>;
