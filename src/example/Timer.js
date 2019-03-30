@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState, useDebugValue } from 'react';
 import './Timer.css';
 
 function formatTime(time) {
@@ -32,8 +32,10 @@ function useTimer(dispatch) {
   function handleStop() {
     dispatch({ type: 'stop' });
     clearInterval(timer);
+    setTimer(null);
   }
 
+  useDebugValue(timer ? 'Running' : 'Stopped');
   return { handleStart, handleStop };
 }
 
