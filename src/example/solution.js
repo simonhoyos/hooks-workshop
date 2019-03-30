@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useRef } from 'react';
 import './Timer.css';
 
 function formatTime(time) {
@@ -11,7 +11,7 @@ function init(initialState) {
 
 function tick({ hours, minutes, seconds }) {
   if (hours > 0 && (minutes <= 0 && seconds <= 0)) {
-    return { hours: hours - 1, minutes: 59, seconds: 59};
+    return { hours: hours - 1, minutes: 59, seconds: 59 };
   }
 
   if (minutes > 0 && seconds <= 0) {
@@ -65,7 +65,7 @@ const initialState = {
 
 function Timer() {
   const [state, dispatch] = useReducer(reducer, initialState, init);
-  let timer;
+  const timer = useRef(null);
 
   function handleDecrement(e) {
     dispatch({ type: 'decrement', payload: { name: e.target.name } });
@@ -77,19 +77,24 @@ function Timer() {
 
   function handleStart() {
     dispatch({ type: 'start' });
-    timer = setInterval(() => dispatch({ type: 'tick' }), 1000);
+    timer.current = setInterval(() => dispatch({ type: 'tick' }), 1000);
   }
 
   function handleStop() {
     dispatch({ type: 'stop' });
-    clearInterval(timer);
+    clearInterval(timer.current);
   }
 
   function handleReset() {
     dispatch({ type: 'reset', payload: initialState });
   }
 
-  if (state.isRunning && state.hours <= 0 && state.minutes <= 0 && state.seconds <= 0) {
+  if (
+    state.isRunning &&
+    state.hours <= 0 &&
+    state.minutes <= 0 &&
+    state.seconds <= 0
+  ) {
     handleStop();
   }
 
@@ -124,22 +129,14 @@ function Timer() {
       >
         Start
       </button>
-      <button
-        onClick={handleStop}
-        className="stop"
-        disabled={!isRunning}
-      >
+      <button onClick={handleStop} className="stop" disabled={!isRunning}>
         Stop
       </button>
-      <button
-        onClick={handleReset}
-        className="reset"
-        disabled={isRunning}
-      >
+      <button onClick={handleReset} className="reset" disabled={isRunning}>
         Reset
       </button>
     </div>
-  )
+  );
 }
 
 function TimeBox({ time, name, isRunning, handleDecrement, handleIncrement }) {
@@ -163,7 +160,7 @@ function TimeBox({ time, name, isRunning, handleDecrement, handleIncrement }) {
         +
       </button>
     </div>
-  )
+  );
 }
 
 export { Timer };
