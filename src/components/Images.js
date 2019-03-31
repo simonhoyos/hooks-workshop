@@ -1,3 +1,5 @@
+// Remueve todo lo relacionado al API.
+
 import React, { useReducer, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Context } from '../store';

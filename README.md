@@ -1,9 +1,8 @@
 # React Medellin Hooks Workshop
 
-## Paso 4
+## Paso 5
 
-- En este ejercicio usaremos los hooks useReducer y useContext.
-- En este ejercicio trabajaremos sobre el componente `./src/components/Images.js`, `./src/components/Navigation.js`, y `./src/store/index.js` donde también podran encontrar instrucciones más detalladas.
-- En store crearemos un contexto que nos permitara compartir entre los componentes el número de la página, así como los handlers para modificarla.
-- En Navigation consumiremos los valores del contexto que creamos para compartir el número de página entre ambas navegaciones.
-- En Images actualizaremos las imagenes, haciendo una nueva petición al servidor cada vez que cambiamos la página.
+- En este ejercicio crearemos un custom hook.
+- En este ejercicio trabajaremos sobre el componente `./src/components/Images.js`, y  el hook `./src/hooks/useApi.js` donde también podran encontrar instrucciones más detalladas.
+- Removeremos toda la funcionalidad relacionada con las peticiones al API de `Images.js`.
+- Crearemos un hook que nos permita reutilizar la funcionalidad del API y lo llamaremos `useApi`.
