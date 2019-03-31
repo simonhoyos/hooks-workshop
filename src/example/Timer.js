@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useDebugValue } from 'react';
+import React, { useReducer, useRef, useDebugValue } from 'react';
 import './Timer.css';
 
 function formatTime(time) {
@@ -22,17 +22,16 @@ function tick({ hours, minutes, seconds }) {
 }
 
 function useTimer(dispatch) {
-  const [timer, setTimer] = useState(null);
+  let timer = useRef(null);
 
   function handleStart() {
     dispatch({ type: 'start' });
-    setTimer(setInterval(() => dispatch({ type: 'tick' }), 1000));
+    timer = setInterval(() => dispatch({ type: 'tick' }), 1000);
   }
 
   function handleStop() {
     dispatch({ type: 'stop' });
     clearInterval(timer);
-    setTimer(null);
   }
 
   useDebugValue(timer ? 'Running' : 'Stopped');
