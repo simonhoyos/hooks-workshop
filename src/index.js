@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import App from './App';
 import { PaginationProvider } from './store';
 // Example
-// import { Text } from "./example/Text";
+// import { Timer } from "./example/Timer";
 
 // Workshop
 ReactDOM.render(
@@ -17,7 +17,7 @@ ReactDOM.render(
   document.getElementById('root')
 );
 // Example
-// ReactDOM.render(<Text />, document.getElementById('root'));
+// ReactDOM.render(<Timer />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
