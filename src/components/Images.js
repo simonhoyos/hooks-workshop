@@ -28,8 +28,8 @@ export function Images() {
   //     _page: 1,
   //     _limit: 9,
   //   },
-  //   // Extra: asigna el token de cancelación a la petición.
-  //   // cancelToken: source.token,
+    // Extra: asigna el token de cancelación a la petición.
+    // cancelToken: source.token,
   // })
   //   .then(({ data }) => {})
   //   .catch((error) => {});
