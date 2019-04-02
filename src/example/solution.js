@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './Timer.css';
+import './Clock.css';
 
-export function Timer() {
+export function Clock() {
   const [count, setCount] = useState(0);
   const [time, setTime] = useState(new Date().toLocaleTimeString());
 
