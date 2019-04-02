@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Timer.css';
+import './Clock.css';
 
-class Timer extends Component {
+class Clock extends Component {
   state = {
     time: '',
   };
@@ -27,4 +27,4 @@ class Timer extends Component {
   }
 }
 
-export { Timer };
+export { Clock };
