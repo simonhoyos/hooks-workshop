@@ -4,7 +4,7 @@ import React from 'react';
 
 
 export function Navigation() {
-  // obten los valores del contexto
+  // obtén los valores del contexto
 
 
   // Arregla el siguiente código para que funcione correctamente usando los valores del contexto

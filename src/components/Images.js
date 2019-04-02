@@ -43,7 +43,7 @@ function reducer(state, action) {
 }
 
 export function Images() {
-  // Obten los valores del contexto
+  // Obtén los valores del contexto
 
 
   const [state, dispatch] = useReducer(reducer, initialState);

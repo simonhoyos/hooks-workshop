@@ -7,7 +7,7 @@ import React from 'react';
 // define el estado inicial para page
 
 
-// crea una funcion reductora para cambiar de página
+// crea una función reductora para cambiar de página
 
 
 export function PaginationProvider({ children }) {
